@@ -1,0 +1,11 @@
+.login-wrapper {
+  display: flex; /* Enable flexbox for layout */
+  justify-content: space-between; /* Distribute elements horizontally */
+  align-items: center; /* Align elements vertically */
+  width: 100%; /* Take up full width of the container */
+}
+
+.login-image {
+  /* Style the image container as needed */
+  width: 40%; /* Adjust image width if desired */
+}
