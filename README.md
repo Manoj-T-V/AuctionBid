@@ -129,7 +129,7 @@ project/
 
     The frontend will run on [http://localhost:3000](http://localhost:3000).
 
-## Database
+## Database Design
 
 ### 1. User Schema
 
