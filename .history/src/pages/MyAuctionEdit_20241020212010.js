@@ -34,7 +34,6 @@ const AuctionEdit = () => {
   }, [id]);
 
   const handleChange = (e) => {
-    
     setAuction({
       ...auction,
       [e.target.name]: e.target.value,
@@ -42,7 +41,6 @@ const AuctionEdit = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
     const { title, description, startingBid, endDate } = auction;
 
     // Simple validation
@@ -72,7 +70,7 @@ const AuctionEdit = () => {
       setError(`Starting bid cannot exceed ₹1 crore (${maxBid.toLocaleString()}).`);
       return;
     }
-
+    e.preventDefault();
     try {
       await axios.put(`${apiUrl}/api/auctions/${id}`, auction, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

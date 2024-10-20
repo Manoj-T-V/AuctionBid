@@ -42,7 +42,7 @@ const AuctionEdit = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e
     const { title, description, startingBid, endDate } = auction;
 
     // Simple validation

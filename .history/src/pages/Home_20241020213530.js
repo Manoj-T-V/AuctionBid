@@ -100,10 +100,8 @@ const Home = () => {
     const fetchAuctions = async () => {
       try {
         const { data } = await axios.get(`${apiUrl}/api/auctions`);
-        const currentDate = new Date();
-      // Filter auctions that have not ended yet
-      const activeAuctions = data.filter(auction => new Date(auction.endDate) > currentDate);
-        setAuctions(activeAuctions);
+        
+        setAuctions(data);
       } catch (error) {
         console.error('Error fetching auctions', error);
       }

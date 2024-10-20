@@ -34,7 +34,7 @@ const AuctionEdit = () => {
   }, [id]);
 
   const handleChange = (e) => {
-    
+    e.preventDefault();
     setAuction({
       ...auction,
       [e.target.name]: e.target.value,
@@ -42,7 +42,6 @@ const AuctionEdit = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
     const { title, description, startingBid, endDate } = auction;
 
     // Simple validation

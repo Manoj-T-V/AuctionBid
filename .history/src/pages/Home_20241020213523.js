@@ -100,10 +100,7 @@ const Home = () => {
     const fetchAuctions = async () => {
       try {
         const { data } = await axios.get(`${apiUrl}/api/auctions`);
-        const currentDate = new Date();
-      // Filter auctions that have not ended yet
-      const activeAuctions = data.filter(auction => new Date(auction.endDate) > currentDate);
-        setAuctions(activeAuctions);
+        setAuctions(data);
       } catch (error) {
         console.error('Error fetching auctions', error);
       }
@@ -120,7 +117,7 @@ const Home = () => {
       ) : (
         <PlaceholderImage>
           <img src={homebanner} alt='Placeholder' />
-          <h1 className="page-title" style={{textAlign: 'left', margin:'2% 0% 1% 2%', width: '100%'}}>Explore <span style={{ color: '#235BDB' }}>Auctions</span></h1>
+          <h1 className="page-title" style={{textAlign: 'left', margin:'2% 0% 1% 2%', width: '100%'}}>Explore <span style={{ color: '#235BDB' }}>{localStorage.getItem('name')}</span></h1>
         </PlaceholderImage>
       )}
       <AuctionList>

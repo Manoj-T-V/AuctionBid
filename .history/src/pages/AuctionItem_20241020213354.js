@@ -4,7 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import useErrorHandler from '../components/ErrorHandler.js';
 import { Link } from 'react-router-dom';
-import lefticon from '../assets/Right icon.svg';
+import lefticon from '../assets/Right icon.svg'
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -34,23 +34,23 @@ const AuctionDetail = styled.div`
     }
   }
 
-  .keys {
-    display: flex;
-    justify-content: space-between;
+  .keys{
+    display:  flex;
+    justify-content: space-between; 
   }
 
-  .values {
-    font-weight: bold;
-    color: #000;
-    margin-left: auto;
+  .values{
+   font-weight: bold;
+  color: #000;
+  margin-left: auto;
   }
 
   .image-section {
-    grid-column: 1 / 2;
+    grid-column: 1 / 2; /* Image and details span one column */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
+    
     .image-details {
       margin-top: 15px;
       text-align: center;
@@ -109,7 +109,7 @@ const AuctionItem = () => {
   useErrorHandler();
   const { id } = useParams();
   const [auction, setAuction] = useState(null);
-  const [bid, setBid] = useState('');
+  const [bid, setBid] = useState("");
   const [bidHistory, setBidHistory] = useState([]);
   const [remainingTime, setRemainingTime] = useState('');
   const [error, setError] = useState('');
@@ -128,17 +128,20 @@ const AuctionItem = () => {
     };
 
     fetchAuction();
+
   }, [id]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (auction) {
-        calculateRemainingTime(auction.endDate);
-      }
+  // Separate effect for updating remaining time
+useEffect(() => {
+   const interval = setInterval(() => {
+     if (auction) {
+      calculateRemainingTime(auction.endDate);
+    }
     }, 60000);
-
+  
+    
     return () => clearInterval(interval);
-  }, [auction]);
+  }, [auction]); 
 
   const calculateRemainingTime = (endDate) => {
     const end = new Date(endDate).getTime();
@@ -159,14 +162,15 @@ const AuctionItem = () => {
 
   const handleBid = async (e) => {
     e.preventDefault();
-    setError('');
-    const bidAmount = Number(bid);
-    const currentBid = Number(auction.currentHighestBid);
+    setError('')
+    // Convert string values to numbers for proper comparison
+  const bidAmount = Number(bid);
+  const currentBid = Number(auction.currentHighestBid);
 
-    if (bidAmount <= currentBid) {
-      setError('Bid must be higher than the current highest bid.');
-      return;
-    }
+  if (bidAmount <= currentBid) {
+    setError("Bid must be higher than the current highest bid.");
+    return;
+  }
     try {
       const response = await axios.post(
         `${apiUrl}/api/bids/${id}/bid`,
@@ -183,13 +187,14 @@ const AuctionItem = () => {
       }));
       setBidHistory((prevBids) => [
         ...prevBids,
-        { amount: bid, bidder: { firstName: 'You', lastName: '' } },
+        { amount: bid, bidder: { firstName: 'You', lastName: '' } }
       ]);
     } catch (error) {
       if (error.response && error.response.status === 401) {
         localStorage.removeItem('token');
         localStorage.removeItem('name');
         localStorage.removeItem('email');
+        // Navigate to login page (adjust as needed)
         window.location.href = '/login';
       }
       console.error('Error placing bid', error);
@@ -200,33 +205,30 @@ const AuctionItem = () => {
     return <div>Loading...</div>;
   }
 
-  const auctionEnded = remainingTime === 'Auction ended';
-
   return (
     <div className="container">
       <AuctionDetail>
+        {/* First Column: Image and Details */}
         <div className="image-section">
-          <Link className="back-link" style={{ marginBottom: '4%' }} to="/">
-            <img src={lefticon} alt="Back" style={{ width: '10%' }} />
-            <span style={{ paddingLeft: '10px' }}>Back to Catalog</span>
-          </Link>
-          <img src="https://picsum.photos/200" alt={auction.title} />
+        <Link className="back-link" style={{marginBottom: '4%'}} to="/">
+    <img src={lefticon} alt="Back" style={{width: '10%'}}/>
+    <span style={{ paddingLeft: '10px' }}>Back to Catalog</span>
+  </Link>
+          <img src='https://picsum.photos/200' alt={auction.title} />
           <div className="image-details">
-            <h2 style={{ textAlign: 'left' }}>{auction.title}</h2>
-            <p className="keys">
-              Minimum Bid <span className="values">${auction.startingBid}</span>
-            </p>
-            <p className="keys">
-              Current Bid <span className="values">${auction.currentHighestBid}</span>
-            </p>
-            <p style={{ textAlign: 'left' }}>{remainingTime}</p>
+            <h2 style={{textAlign: 'left'}}>{auction.title}</h2>
+            <p className='keys'>Minimum Bid <span className='values'>${auction.startingBid}</span></p>
+            <p className='keys'>Current Bid <span className='values'>${auction.currentHighestBid}</span></p>
+            <p style={{textAlign: 'left'}}>{remainingTime}</p>
           </div>
         </div>
 
+        {/* Second Column: Description */}
         <div className="column description">
           <p>{auction.description}</p>
         </div>
 
+        {/* Third Column: Bid History */}
         <div className="column bid-history">
           <h3>Bid History</h3>
           <ul>
@@ -237,25 +239,17 @@ const AuctionItem = () => {
             ))}
           </ul>
 
-          {auctionEnded ? (
-            <div>
-              <p style={{ color: 'red' }}>Auction ended.</p>
-              <p>
-                Winner: {bidHistory.length > 0 ? `${bidHistory[bidHistory.length - 1].bidder.firstName}` : 'No bids'}
-              </p>
-            </div>
-          ) : (
-            <form className="bid-form" onSubmit={handleBid}>
-              <input
-                type="number"
-                placeholder="Enter your bid"
-                value={bid}
-                onChange={(e) => setBid(e.target.value)}
-                required
-              />
-              <button type="submit">Place Bid</button>
-            </form>
-          )}
+          {/* Bid Form */}
+          <form className="bid-form" onSubmit={handleBid}>
+            <input
+              type="number"
+              placeholder="Enter your bid"
+              value={bid}
+              onChange={(e) => setBid(e.target.value)}
+              required
+            />
+            <button type="submit">Place Bid</button>
+          </form>
           {error && <div style={{ color: 'red' }}>{error}</div>}
         </div>
       </AuctionDetail>
