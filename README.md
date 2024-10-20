@@ -1,6 +1,6 @@
-# 🎉 Auction Bidding System
+# 🎉 Auction-Bid System
 
-Welcome to the **Auction Bidding System**! This MERN application is designed to manage auctions, bids, and users.
+Welcome to the **Auction-Bid System**! This MERN application is designed to manage auctions, bids, and users.
 
 #### It features:
 
