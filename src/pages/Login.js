@@ -11,11 +11,13 @@ const apiUrl = process.env.REACT_APP_API_URL;
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState(''); // State to store error message
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    console.log(apiUrl);
     e.preventDefault();
+    setErrorMessage(''); // Reset error message before login attempt
+
     try {
       const response = await axios.post(`${apiUrl}/api/auth/login`, { email, password });
       console.log('Login successful:', response.data);
@@ -25,6 +27,11 @@ function LoginPage() {
       localStorage.setItem('token', token);
       navigate('/');
     } catch (error) {
+      if (error.response && error.response.data && error.response.data.message) {
+        setErrorMessage(error.response.data.message); // Set specific error message from API
+      } else {
+        setErrorMessage("Login failed, check your email or/and password."); // Default error message
+      }
       console.error("Error while logging in:", error);
     }
   };
@@ -35,6 +42,10 @@ function LoginPage() {
         <div className="login-card">
           <h2>Login</h2>
           <p>Welcome back. Enter your credentials to access your account.</p>
+
+          {/* Show error message if it exists */}
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
+
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <label htmlFor="email">Email Address</label>
@@ -60,6 +71,7 @@ function LoginPage() {
             </div>
             <button type="submit" className="full-width-button">Continue</button>
           </form>
+
           <p>or sign up with</p>
           <div className="social-login">
             <button className="google-login">Google</button>
@@ -69,7 +81,7 @@ function LoginPage() {
           <p>Don't have an account? <Link to="/register">Sign up here</Link></p>
         </div>
         <div className="login-image">
-          <img src={loginImage} alt="Login illustration" style={{width:'100%'}}/>
+          <img src={loginImage} alt="Login illustration" style={{ width: '100%' }} />
         </div>
       </div>
     </div>
