@@ -1,0 +1,65 @@
+.login-container {
+
+  padding: 20px; /* Add padding to the container */
+}
+
+.login-card {
+  padding: 40px; /* Increase padding within the card */
+  width: 62%;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.input-group input {
+  
+  padding: 12px; /* Increase padding for input fields */
+}
+
+.forgot-password {
+  display: block;
+  text-align: right;
+  margin-top: 5px;
+  color: #666;
+  font-size: 14px;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.checkbox-group input {
+  margin-right: 5px;
+}
+
+.social-login {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  place-content: space-evenly;
+}
+
+.login-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.full-width-button {
+  width: 100%; 
+}
+
+.login-image{
+  width: 0%;
+}
