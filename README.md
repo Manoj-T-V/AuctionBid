@@ -1,70 +1,193 @@
-# Getting Started with Create React App
+# 🎉 Auction Bidding System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the **Auction Bidding System**! This MERN application is designed to manage auctions, bids, and users.
 
-## Available Scripts
+#### It features:
 
-In the project directory, you can run:
+-   **Backend**: Built with **Node.js** and **Express**. https://github.com/Manoj-T-V/ApiAuctionBid
+-   **Frontend**: Developed using **React**.
+-   **Styling**: Developed using **Styled-components**.
+-   **Database**: Uses **MongoDB** for data storage hosted on Mongoatlas.
+-   **Authentication**: Managed with **JWT** (JSON Web Tokens).
+-   **Password Security**: Handled with **bcrypt** for hashing passwords.
+-   **API Documentation**: Done using Swagger UI.
 
-### `npm start`
+## 📂 Directory Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```plaintext
+project/
+├── backend/
+│   ├── config/
+│   │   └── db.js            # Database configuration and connection setup
+│   │   └── passport.js      # Google authentication configuration and connection setup
+│   ├── controllers/
+│   │   ├── auctionController.js  # Business logic for auction management
+│   │   ├── bidController.js      # Business logic for bid management
+│   │   └── userController.js     # Business logic for user management
+│   ├── middleware/
+│   │   └── authMiddleware.js     # Middleware for authentication
+│   ├── models/
+│   │   ├── AuctionItem.js        # Mongoose schema for auction items
+│   │   ├── Bid.js                # Mongoose schema for bids
+│   │   └── User.js               # Mongoose schema for users
+│   ├   └── Notification.js       # Mongoose schema for notifications
+│   ├── routes/
+│   │   ├── auctionRoutes.js      # API routes for auction-related requests
+│   │   ├── bidRoutes.js          # API routes for bid-related requests
+│   │   └── userRoutes.js         # API routes for user-related requests
+│   └── index.js                  # Entry point for the backend server
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Footer.js         # Component for footer
+│   │   │   ├── NavBar.js         # Component for Navbar
+│   │   │   ├── ErrorHandler.js   # Custom error handler
+│   │   │   ├── PrivateRoute.jsx  # Authorizing components
+│   │   │   
+│   │   ├── pages/
+│   │   │   └── AuctionItem.js    # Displaying auction details
+│   │   │   └── CreateAuction.js  # creating auction 
+│   │   │   └── Home.js           # Homepage
+│   │   │   └── Login.js          # Login page
+│   │   │   └── MyAuctionEdit.js  # auction edit
+│   │   │   └── Myauctions.js     # Displaying logged in user auctions
+│   │   │   └── MyBid.js          # Displaying logged in user Bids
+│   │   │   └── Notifications.js  # Displaying logged in notifications
+│   │   │   └── Profile.js        # Displaying logged in user bids, auctions
+│   │   │   └── Register.js       # Regsiter page
+│   │   │   └── Welcome.js        # Displaying Welcome
+│   │   ├── App.jsx               # Main application component
+│   │   ├── index.js              # Entry point for the React app
+│   ├───├── assets                # projects icons, images
+│   └── index.html                # Main HTML file for the frontend
+└── README.md                     # This file
+```
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🚀 Getting Started
 
-### `npm run build`
+### Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-   **Node.js** (v14 or later)
+-   **npm** (v6 or later) or **yarn**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Backend
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Install dependencies in backend directory:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    ```bash
+    npm install
+    ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Set up environment variables:
+    - Create a `.env` file in the `backend` directory with the following content:
+        ```plaintext
+        MONGODB_URI=your_mongo_uri
+        JWT_SECRET=your_jwt_secret
+        GOOGLE_CLIENT_ID=
+        GOOGLE_CLIENT_SECRET=
+        SESSION_SECRET=
+        ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Frontend
 
-## Learn More
+1. Install dependencies in frontend directory:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    ```bash
+    npm install
+    ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. Set up environment variables:
+    - Create a `.env` file in the `frontend` directory with the following content:
+        ```plaintext
+        TARGET=http://localhost:5000 or url of backend
+        ```
 
-### Code Splitting
+## 🏃‍♂️ Running the Project
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Backend
 
-### Analyzing the Bundle Size
+1. Start the backend server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+    ```bash
+    npm start
+    ```
 
-### Making a Progressive Web App
+    The backend will run on [http://localhost:5000](http://localhost:5000).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Frontend
 
-### Advanced Configuration
+1. Start the frontend development server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+    ```bash
+    npm start
+    ```
 
-### Deployment
+    The frontend will run on [http://localhost:3000](http://localhost:3000).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Database
 
-### `npm run build` fails to minify
+### 1. User Schema
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The `User` model stores information about the users who register and participate in the auction.
+
+{
+  _id: ObjectId(""),
+  firstName: String,         // User's first name
+  lastName: String,          // User's last name
+  email: String,             // User's email (used for authentication)
+  password: String,          // Hashed password
+  createdAt: Date,           // Account creation date
+  updatedAt: Date            // Last profile update timestamp
+}
+
+### 2. AuctionItem Schema
+
+The `AuctionItem` model defines each auction item being listed for bidding.
+
+{
+  _id: ObjectId(""),
+  title: String,                  // Title of the auction item
+  description: String,            // Brief description of the auction item
+  startingBid: Number,            // Starting bid amount
+  currentHighestBid: Number,      // Current highest bid on the item
+  createdBy: ObjectId(""),        // Reference to the user who created the auction
+  endDate: Date,                  // Auction end date and time
+  bids: Array,                    // Array of bid references
+  highestBidder: ObjectId(""),    // Reference to the current highest bidder
+  createdAt: Date                 // Timestamp when the auction was created
+}
+
+### 3. Bid Schema
+
+The Bid model represents the bids placed by users on auction items.
+
+{
+  _id: ObjectId(""),
+  amount: Number,                 // The amount bid by the user
+  bidder: ObjectId(""),           // Reference to the user who placed the bid
+  auctionItem: ObjectId(""),      // Reference to the auction item
+  createdAt: Date                 // Timestamp when the bid was placed
+}
+
+### 4. Notification Schema
+
+The Notification model manages notifications sent to users when certain events occur, like being outbid
+
+{
+  _id: ObjectId(""),
+  user: ObjectId(""),                          // Reference to the user who will receive the notification
+  message: String,                             // Notification message
+  email: String,                               // Email of the user for notification
+  isRead: Boolean,                             // Whether the notification has been read or not
+  createdAt: Date                              // Timestamp when the notification was created
+}
+
+A user can create multiple auction items. Each AuctionItem has a createdBy field referencing a User.
+Each AuctionItem can have many bids, represented by the bids array containing references to the Bid model. Each Bid also references an AuctionItem.
+A user can place multiple bids, each Bid has a bidder field referencing a User.
+Each notification is linked to a user. The Notification model references the User model to send notifications based on actions like bidding.
