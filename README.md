@@ -187,7 +187,7 @@ The Notification model manages notifications sent to users when certain events o
   createdAt: Date                              // Timestamp when the notification was created
 }
 
-### A user can create multiple auction items. Each AuctionItem has a createdBy field referencing a User.
-### Each AuctionItem can have many bids, represented by the bids array containing references to the Bid model. Each Bid also references an AuctionItem.
-### A user can place multiple bids, each Bid has a bidder field referencing a User.
-### Each notification is linked to a user. The Notification model references the User model to send notifications based on actions like bidding.
+#### A user can create multiple auction items. Each AuctionItem has a createdBy field referencing a User.
+#### Each AuctionItem can have many bids, represented by the bids array containing references to the Bid model. Each Bid also references an AuctionItem.
+#### A user can place multiple bids, each Bid has a bidder field referencing a User.
+#### Each notification is linked to a user. The Notification model references the User model to send notifications based on actions like bidding.
